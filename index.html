@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <link rel="stylesheet" href="css12.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZAPLKAY - אתר משחקים</title>
+  <style>
+    body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  
+  /* רקע כחול משתנה */
+  background: linear-gradient(-45deg, #0a1a33, #0d47a1, #001f54, #003c8f);
+  background-size: 400% 400%;
+  animation: gradientBG 14s ease infinite;
+  color: #fff;
+  text-align: center;
+
+  /* זוהר עדין לטקסט */
+  text-shadow: 0 0 8px rgba(30,144,255,0.7);
+}
+
+@keyframes gradientBG {
+  0%   { background-position: 0% 50%; }
+  25%  { background-position: 100% 50%; }
+  50%  { background-position: 100% 100%; }
+  75%  { background-position: 0% 100%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* --- שורת משחקים --- */
+.games-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* --- כרטיסי משחק --- */
+.game-card {
+  width: 300px;
+  height: 160px;
+  background: #0d1b2a;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(30,144,255,0.4);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s, opacity 0.3s, box-shadow 0.3s;
+  border: 1px solid rgba(30,144,255,0.7);
+}
+
+.game-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(30,144,255,0.9);
+}
+
+.game-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  background: rgba(0,0,0,0.75);
+  color: #1e90ff;
+  font-size: 16px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.game-card:hover .game-label {
+  opacity: 1;
+}
+
+.game-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* --- חיפוש --- */
+.search-container {
+  position: relative;
+  width: 500px;
+  margin: 13px auto;
+  margin-left: 32vw;
+}
+
+#search-input {
+  width: 120%;
+  padding: 12px 20px 12px 45px;
+  border: 2px solid #1e90ff;
+  border-radius: 30px;
+  background: #0a0f1f;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s;
+  box-shadow: 0 0 15px rgba(30,144,255,0.8);
+}
+
+#search-input::placeholder {
+  color: #6faaff;
+  font-style: italic;
+  text-align: right;
+}
+
+#search-input:focus {
+  border-color: #1e90ff;
+  box-shadow: 0 0 20px rgba(30,144,255,1);
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  width: 20px;
+  height: 20px;
+  stroke: #1e90ff;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* --- אנימציית כרטיסים --- */
+.game-card {
+  transition: all 0.3s ease;
+  margin: 10px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.game-card.hide {
+  opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none;
+}
+
+/* --- רספונסיבי --- */
+@media (max-width: 768px) {
+  #search-container {
+    max-width: 90%;
+  }
+  .game-card {
+    width: 48%;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-card {
+    width: 100%;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <div class="logo">
+    <div>ZA</div>
+
+    <div class="face">
+      <div class="hair"></div>
+      <div class="eye left"><div class="pupil"></div></div>
+      <div class="eye right"><div class="pupil"></div></div>
+      <div class="mouth"></div>
+    </div>
+
+    <div>PLAY</div>
+  </div>
+
+  <div class="subtitle">games and fun to play</div>
+<header style="width: 100%; max-width: 1800px; margin: 20px auto; text-align: center;">
+  <hr style="border: 1px solid rgba(255,255,255,0.3); margin-top: 10px;">
+</header>
+<div class="search-container">
+  <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path fill="none" stroke="blueviolet" stroke-width="2" d="M21 21l-4.35-4.35m2.85-5.65a7 7 0 1 1-14 0 7 7 0 0 1 14 0z"/>
+  </svg>
+  <input type="text" id="search-input" placeholder="...Search a game">
+</div>
+
+
+<div id="games-container">
+<div class="games-row">
+<div class="game-card" data-id="racing">
+  <a href="player.html?game=https://html5.gamemonetize.co/yuep0wj5qlgeepk3zbwd11b7ye6bgbck/">
+    <img src="Granny GTA Vegas-512x384.jpg"/>
+    <div class="game-label">🎮 Granny GTA Vegas</div>
+  </a>
+</div>
+
+<div class="game-card" data-id="shooters">
+  <a href="player.html?game=https://html5.gamemonetize.co/gxwulrf1sr4thmrx7bo3w4f3ks3cofwk/">
+    <img src="Counter Craft Classic 2-512x340.jpg"  />
+    <div class="game-label">🎮 Counter Craft Classic 2</div>
+  </a>
+</div>
+
+<div class="game-card" data-id="shooters">
+  <a href="player.html?game=https://html5.gamemonetize.co/s0e0jqx8z8e8s5n9dshww2gexamrw0cm/">
+    <img src="Sure Shot-512x512.jpg" alt="Sure Shot" />
+    <div class="game-label">🎯 Sure Shot</div>
+  </a>
+</div>
+</div>
+
+<div class="games-row">
+<div class="game-card" data-id="shooters">
+  <a href="player.html?game=https://1000webgames.com/games/battlearea/html5/">
+    <img src="battlearea-200x200.jpg" alt="Battle Area" />
+    <div class="game-label">🎮 Battle Area</div>
+  </a>
+</div>
+
+<div class="game-card" data-id="shooters">
+  <a href="player.html?game=https://1000webgames.com/games/warfarearea/html5/">
+    <img src="shotgame1.jpg" alt="Warfare Area" />
+    <div class="game-label">🎮 Warfare Area</div>
+  </a>
+</div>
+
+<div class="game-card" data-id="shooters">
+  <a href="player.html?game=https://1000webgames.com/games/warfarearea2/html5/">
+    <img src="WARFARE AREA 2.jpg" alt="Warfare Area 2" />
+    <div class="game-label">🎮 Warfare Area 2</div>
+  </a>
+</div>
+</div>
+
+<div class="games-row">
+<div class="game-card" data-id="cars">
+  <a href="player.html?game=https://html5.gamemonetize.co/ousj5se644v7dap2ct2hbr9332glci0h/">
+    <img src="Vehicle Stunts Sky Sim-512x384.jpg" alt="Vehicle Stunts Sky Sim" />
+    <div class="game-label">🚗 Vehicle Stunts Sky Sim</div>
+  </a>
+</div>
+
+<div class="game-card" data-id="cars">
+  <a href="player.html?game=https://html5.gamemonetize.co/kt0h2atqrt5kejjevpi97ph6ckg0tw9g/">
+    <img src="Ramp Bus Stunt Simulator-512x384.jpg" alt="Ramp Bus Stunt Simulator" />
+    <div class="game-label">🚌 Ramp Bus Stunt Simulator</div>
+  </a>
+</div>
+
+<div class="game-card" data-id="cars">
+  <a href="player.html?game=https://html5.gamemonetize.co/g4ydbpcjitxu3lo0hndbelk00qae6iut/">
+    <img src="Real GT Racing Simulator-512x512.jpg" alt="Real GT Racing Simulator" />
+    <div class="game-label">🏎️ Real GT Racing Simulator</div>
+  </a>
+</div>
+</div>
+
+<div class="games-row">
+<div class="game-card" data-id="cars">
+  <a href="player.html?game=https://html5.gamemonetize.co/4ljuamwizz9hqo932u4zv7zrbpqlklyr/">
+    <img src="Long Trailer Truck Transport Sim-512x384.jpg" alt="Long Trailer Truck Transport Sim" />
+    <div class="game-label">🚚 Long Trailer Truck Transport Sim</div>
+  </a>
+</div>
+
+<div class="game-card" data-id="cars">
+  <a href="player.html?game=https://html5.gamemonetize.co/h5olfnxppyvcls3lqcczan5wwm4r4rbz/">
+    <img src="Extreme Car City Driving-512x384.jpg" alt="Extreme Car City Driving" />
+    <div class="game-label">🚘 Extreme Car City Driving</div>
+  </a>
+</div>
+
+<div class="game-card" data-id="cars">
+  <a href="player.html?game=https://html5.gamemonetize.co/t2k033u0g3n11gnyyur592liam2k86wc/">
+    <img src="GT Formula Championship-512x384.jpg" alt="GT Formula Championship" />
+    <div class="game-label">🏁 GT Formula Championship</div>
+  </a>
+</div>
+</div>
+
+<div class="games-row">
+  <div class="game-card" data-id="racing">
+    <a href="player.html?game=https://html5.gamemonetize.co/zwg8qrlmqd5hnbd39kgftqa3lm6htdgp/">
+      <img src="Offroad Jeep Hills Driving-512x384.jpg" alt="Offroad Jeep Hills Driving" />
+      <div class="game-label">🚙 Offroad Jeep Hills Driving</div>
+    </a>
+  </div>
+
+  <div class="game-card" data-id="racing">
+    <a href="player.html?game=https://html5.gamemonetize.co/c32o5le1bu4sxm4xdzwervlir7xw7u99/">
+      <img src="Ramp race-512x340.jpg" alt="Ramp Race" />
+      <div class="game-label">🏎️ Ramp Race</div>
+    </a>
+  </div>
+
+  <div class="game-card" data-id="racing">
+    <a href="player.html?game=https://html5.gamemonetize.co/6wehfwvhqz38sko3kanj7a5btwrrtk6n/">
+      <img src="Stunt Sprint-512x384.jpg" alt="Stunt Sprint" />
+      <div class="game-label">🔥 Stunt Sprint</div>
+    </a>
+  </div>
+</div>
+
+<div class="games-row">
+  <div class="game-card" data-id="racing">
+    <a href="player.html?game=https://html5.gamemonetize.co/3qo6bwp6aea8pj4ntuulxtyqsszn30ns/">
+      <img src="Moto Attack-512x512.jpg" alt="Moto Attack" />
+      <div class="game-label">🏍️ Moto Attack</div>
+    </a>
+  </div>
+
+  <div class="game-card" data-id="racing">
+    <a href="player.html?game=https://html5.gamemonetize.co/avkcgcjgjh3tq64xmsdwk9tmyblwyzqh/">
+      <img src="Turbo Racer 3D-512x512.jpg" alt="Turbo Racer 3D" />
+      <div class="game-label">🚀 Turbo Racer 3D</div>
+    </a>
+  </div>
+
+  <div class="game-card" data-id="racing">
+    <a href="player.html?game=https://html5.gamemonetize.co/h2756112zb490g5tjjpoq6av147lo7i7/">
+      <img src="Classic Car Parking 2025-512x384.jpg" alt="Classic Car Parking 2025" />
+      <div class="game-label">🅿️ Classic Car Parking 2025</div>
+    </a>
+  </div>
+</div>
+
+<div class="games-row">
+  <div class="game-card" data-id="racing">
+    <a href="player.html?game=https://html5.gamemonetize.co/b3wf02pl29r9phmtmpya454sr6dw1hyp/">
+      <img src="Cargo Truck simulator 2025-512x384.jpg" alt="Cargo Truck Simulator 2025" />
+      <div class="game-label">🚚 Cargo Truck Simulator 2025</div>
+    </a>
+  </div>
+
+  <div class="game-card" data-id="racing">
+    <a href="player.html?game=https://html5.gamemonetize.co/ko9f4fjkf5yghqs0xg6luz1w58pffaa1/">
+      <img src="Military Vehicle Driving Simulation-512x384.jpg" alt="Military Vehicle Driving Simulation" />
+      <div class="game-label">🚛 Military Vehicle Driving Simulation</div>
+    </a>
+  </div>
+
+  <div class="game-card" data-id="racing">
+    <a href="player.html?game=https://html5.gamemonetize.co/oyql8cwsas24prq2plynllt9trjs0tga/">
+      <img src="Realistic Monster Truck Offroad Simulator-512x384.jpg" alt="Realistic Monster Truck Offroad Simulator" />
+      <div class="game-label">🛻 Monster Truck Offroad Simulator</div>
+    </a>
+  </div>
+</div>
+
+<div class="games-row">
+  <div class="game-card" data-id="racing">
+    <a href="player.html?game=https://html5.gamemonetize.co/6mpmshr3a56tp1x01u87xfj3i330ucdy/">
+      <img src="Street Car Racing-512x340.jpg" alt="Street Car Racing" />
+      <div class="game-label">🏎️ Street Car Racing</div>
+    </a>
+  </div>
+
+  <div class="game-card" data-id="racing">
+    <a href="player.html?game=https://html5.gamemonetize.co/by7xqtmizsrctwklvb5kkxc797ho45v0/">
+      <img src="Mad Car Drive Future Racing-512x384.jpg" alt="Mad Car Drive Future Racing" />
+      <div class="game-label">🔥 Mad Car Drive Future Racing</div>
+    </a>
+  </div>
+
+  <div class="game-card" data-id="racing">
+    <a href="player.html?game=https://html5.gamemonetize.co/whsoq6n1ply6s1k4lbjfnwaozsjb26t5/">
+      <img src="Highway Racer 3D-512x340.jpg" alt="Highway Racer 3D" />
+      <div class="game-label">🛣️ Highway Racer 3D</div>
+    </a>
+  </div>
+</div>
+
+<div class="games-row">
+  <div class="game-card" data-id="kids">
+    <a href="player.html?game=https://html5.gamemonetize.co/aay2n8ghaqbdq7naxiyrxctjhs27mx2r/">
+      <img src="Scary Huggy Playtime-512x384.jpg" alt="Scary Huggy Playtime" />
+      <div class="game-label">👾 Scary Huggy Playtime</div>
+    </a>
+  </div>
+
+  <div class="game-card" data-id="puzzle">
+    <a href="player.html?game=https://html5.gamemonetize.co/sbl8yu3rqpqojmfmkvgntma0l44vf63f/">
+      <img src="Squid Game cookie Puzzle-512x384.jpg" alt="Squid Game Cookie Puzzle" />
+      <div class="game-label">🍪 Squid Game Cookie Puzzle</div>
+    </a>
+  </div>
+
+  <div class="game-card" data-id="puzzle">
+    <a href="player.html?game=https://html5.gamemonetize.co/at5qajnkf4aipxlh2s41jddt46o4534f/">
+      <img src="Super Mario Jigsaw Puzzle-512x384.jpg" alt="Super Mario Jigsaw Puzzle" />
+      <div class="game-label">🧩 Super Mario Jigsaw Puzzle</div>
+    </a>
+  </div>
+</div>
+
+<div class="games-row">
+  <div class="game-card" data-id="kids">
+    <a href="player.html?game=https://html5.gamemonetize.co/rrcjjjeau91stfs3fcoopnr101g1awgh/">
+      <img src="Save the Dummy-512x512.jpg" alt="Save the Dummy" />
+      <div class="game-label">🧸 Save the Dummy</div>
+    </a>
+  </div>
+
+  <div class="game-card" data-id="puzzle">
+    <a href="player.html?game=https://html5.gamemonetize.co/ds2heii3l2c33s49adyu4p7bw38ws8mh/">
+      <img src="Tomb Escaper-512x512.jpg" alt="Tomb Escaper" />
+      <div class="game-label">🏺 Tomb Escaper</div>
+    </a>
+  </div>
+
+  <div class="game-card" data-id="puzzle">
+    <a href="player.html?game=https://html5.gamemonetize.co/eirktd1llekn0xuey0boarevqk8dot4y/">
+      <img src="New Years Cube in 3D-512x512.jpg" alt="New Years Cube in 3D" />
+      <div class="game-label">🎉 New Years Cube in 3D</div>
+    </a>
+  </div>
+</div>
+
+<div class="games-row">
+  <div class="game-card" data-id="puzzle">
+    <a href="player.html?game=https://html5.gamemonetize.co/k0vt8j1ejvzhgr6phq6qfr1ag6nqxxph/">
+      <img src="Save The Stick Draw Line-512x512.jpg" alt="Save The Stick Draw Line" />
+      <div class="game-label">✏️ Save The Stick Draw Line</div>
+    </a>
+  </div>
+
+  <div class="game-card" data-id="puzzle">
+    <a href="player.html?game=https://html5.gamemonetize.co/lmp67tkqo1z2glaxsqvc5yxh1bzlbbft/">
+      <img src="Jelly Connect-512x512.jpg" alt="Jelly Connect" />
+      <div class="game-label">🟣 Jelly Connect</div>
+    </a>
+  </div>
+
+  <div class="game-card" data-id="racing">
+    <a href="player.html?game=https://html5.gamemonetize.co/aun5e95mft6dlndd98uofuhvb575x8en/">
+      <img src="Draw Surfer Game-512x512.jpg" alt="Draw Surfer Game" />
+      <div class="game-label">🏄 Draw Surfer Game</div>
+    </a>
+  </div>
+</div>
+
+<div class="games-row">
+  <div class="game-card" data-id="puzzle">
+    <a href="player.html?game=https://html5.gamemonetize.co/lzcs3ex5x2y90qpsil38iuv7jxkuckal/">
+      <img src="Guess The Drawing-512x512.jpg" alt="Guess The Drawing" />
+      <div class="game-label">🎨 Guess The Drawing</div>
+    </a>
+  </div>
+
+  <div class="game-card" data-id="puzzle">
+    <a href="player.html?game=https://html5.gamemonetize.co/4ttezgpoan70trh4rysv49clfkboyop3/">
+      <img src="Buddy Jigsaw Puzzle-512x512.jpg" alt="Buddy Jigsaw Puzzle" />
+      <div class="game-label">🧩 Buddy Jigsaw Puzzle</div>
+    </a>
+  </div>
+
+  <div class="game-card" data-id="shooter">
+    <a href="player.html?game=https://html5.gamemonetize.co/cjkzivm0hh60noz8ku1c91uwowpx668b/">
+      <img src="Ultimate Assassination-512x512.jpg" alt="Ultimate Assassination" />
+      <div class="game-label">🗡️ Ultimate Assassination</div>
+    </a>
+  </div>
+</div>
+
+<div class="games-row">
+  <div class="game-card" data-id="board">
+    <a href="player.html?game=https://html5.gamemonetize.co/cesnlh8sq40hoqm7t79vz7xnb1mzvnbx/">
+      <img src="Domino Online Multiplayer-512x512.jpg" alt="Domino Online Multiplayer" />
+      <div class="game-label">🎲 Domino Online Multiplayer</div>
+    </a>
+  </div>
+
+  <div class="game-card" data-id="action">
+    <a href="player.html?game=https://html5.gamemonetize.co/bmzifa3ps1halac7g1qu9bxyqn17nxm5/">
+      <img src="Collect And Break-512x340.jpg" alt="Collect And Break" />
+      <div class="game-label">💥 Collect And Break</div>
+    </a>
+  </div>
+
+  <div class="game-card" data-id="action">
+    <a href="player.html?game=https://html5.gamemonetize.co/jaqqv93i49xn0g4s3rflkp08zh9w0wk5/">
+      <img src="Wood Nuts Bolts Screw-512x512.jpg" alt="Wood Nuts Bolts Screw" />
+      <div class="game-label">🔩 Wood Nuts Bolts Screw</div>
+    </a>
+  </div>
+</div>
+
+<div class="games-row">
+  <div class="game-card" data-id="puzzle">
+    <a href="player.html?game=https://html5.gamemonetize.co/28n4a72ig2ztbfe0dmil32ozz21i2zg4/">
+      <img src="Happy Glass Puzzles-512x512 (1).jpg" alt="Happy Glass Puzzles" />
+      <div class="game-label">🥤 Happy Glass Puzzles</div>
+    </a>
+  </div>
+
+  <div class="game-card" data-id="puzzle">
+    <a href="player.html?game=https://html5.gamemonetize.co/vfkef0h65ixool4c1mldayie4t74nmud/">
+      <img src="2048 Cubes-512x512.jpg" alt="2048 Cubes" />
+      <div class="game-label">🔢 2048 Cubes</div>
+    </a>
+  </div>
+
+  <div class="game-card" data-id="puzzle">
+    <a href="player.html?game=https://html5.gamemonetize.co/87w88djt27bir4xxat9hnmp9uozm5qdm/">
+      <img src="Line Shape Puzzle-512x384.jpg" alt="Line Shape Puzzle" />
+      <div class="game-label">📐 Line Shape Puzzle</div>
+    </a>
+  </div>
+</div>
+</div>
+
+
+
+  <script>
+    const pupils = document.querySelectorAll('.pupil');
+    document.addEventListener('mousemove', e => {
+      const eyes = document.querySelectorAll('.eye');
+      eyes.forEach((eye, i) => {
+        const pupil = pupils[i];
+        const rect = eye.getBoundingClientRect();
+        const eyeX = rect.left + rect.width/2;
+        const eyeY = rect.top + rect.height/2;
+        const angle = Math.atan2(e.clientY - eyeY, e.clientX - eyeX);
+        const radius = 3;
+        const pupilX = Math.cos(angle)*radius;
+        const pupilY = Math.sin(angle)*radius;
+        pupil.style.left = 4 + pupilX + 'px';
+        pupil.style.top = 4 + pupilY + 'px';
+      });
+    });
+
+
+
+
+
+const searchInput = document.getElementById('search-input');
+const gameCards = document.querySelectorAll('.game-card');
+
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.toLowerCase().trim();
+
+  gameCards.forEach(card => {
+    const gameId = card.getAttribute('data-id').toLowerCase();
+    const gameName = card.querySelector('.game-label').textContent.toLowerCase();
+
+    if (gameId.includes(query) || gameName.includes(query)) {
+      card.classList.remove('hide');
+    } else {
+      card.classList.add('hide');
+    }
+  });
+});
+
+  </script>
+  
+<script src="nagishli_beta.js"></script>
+
+</body>
+</html>

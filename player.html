@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="css12.css">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Player - ZAPLKAY</title>
+<style>
+/* רקע כללי */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #2c5364);
+  background-size: 400% 400%;
+  animation: gradientBG 20s ease infinite;
+  color: #fff;
+  
+      text-align: center;
+}
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* כפתורים רגילים */
+button {
+  padding: 12px 28px;
+  margin: 10px auto;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  display: block;
+}
+button:hover {
+  transform: translateY(-3px) scale(1.05);
+  background: linear-gradient(135deg, #2575fc, #6a11cb);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+
+/* מיכל המשחק עם כפתור מסך מלא עליון */
+.game-container {
+  position: relative;
+  width: 95%;
+  max-width: 1400px;
+  margin: 10px auto 30px;
+}
+
+/* כפתור מסך מלא מעל המשחק */
+#fullscreen-btn {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  border-radius: 50px;
+  padding: 10px 16px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 1000;
+  transition: 0.3s;
+}
+#fullscreen-btn:hover {
+  background: rgba(38, 198, 218, 0.7); /* אפקט ניאון טורקיז */
+}
+
+/* חלון המשחק */
+#game-frame {
+  width: 100%;
+  height: 85vh;
+  border: none;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+  background: #000;
+  transition: transform 0.3s ease;
+}
+
+/* טקסט שגיאה */
+.error-message {
+  padding: 30px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #ff4d6d;
+  text-align: center;
+  text-shadow: 0 0 8px rgba(255,77,109,0.8);
+}
+#back-btn {
+  position: fixed;       /* תמיד נשאר בקצה המסך */
+  top: 20px;             /* רווח מלמעלה */
+  right: 20px;           /* מימין */
+  background: #444;      /* צבע רגוע יותר */
+  color: #fff;           /* צבע טקסט לבן */
+  border: none;
+  border-radius: 25px;   /* עגול יותר */
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2); /* צל עדין */
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+</style>
+</head>
+<body>
+  
+  <div class="logo">
+    <div>ZA</div>
+
+    <div class="face">
+      <div class="hair"></div>
+      <div class="eye left"><div class="pupil"></div></div>
+      <div class="eye right"><div class="pupil"></div></div>
+      <div class="mouth"></div>
+    </div>
+
+    <div>PLAY</div>
+  </div>
+<header style="width: 100%; max-width: 1800px; margin: 20px auto; text-align: center;">
+  <hr style="border: 1px solid rgba(255,255,255,0.3); margin-top: 10px;">
+</header>
+
+<button id="back-btn" onclick="location.href='index.html'">⬅ חזרה</button>
+
+<div class="game-container">
+  <iframe id="game-frame" src=""></iframe>
+  <button id="fullscreen-btn">⛶</button>
+</div>
+
+<div class="games-row">
+  <div class="game-card" onclick="location.href='player.html?game=https%3A%2F%2Fhtml5.gamemonetize.co%2Fccons3f0b0o17o9zzx7idewbiro075i1%2F'">
+    <img src="images/game1.jpg" alt="משחק קליקים מהיר" />
+    <div class="game-label">🖱️ משחק קליקים מהיר</div>
+  </div>
+
+  <div class="game-card" onclick="location.href='player.html?game=https%3A%2F%2Fhtml5.gamemonetize.co%2Fgxwulrf1sr4thmrx7bo3w4f3ks3cofwk%2F'">
+    <img src="images/game2.jpg" alt="Grand Crime City" />
+    <div class="game-label">🚓 Grand Crime City</div>
+  </div>
+
+  <div class="game-card" onclick="location.href='player.html?game=game3.html'">
+    <img src="images/game3.jpg" alt="משחק זיכרון מהיר" />
+    <div class="game-label">🧠 משחק זיכרון מהיר</div>
+  </div>
+</div>
+
+<script>
+  // טעינת משחק
+  const params = new URLSearchParams(window.location.search);
+  const game = params.get('game');
+  if(game && (game.startsWith('http://') || game.startsWith('https://') || game.endsWith('.html'))) {
+    document.getElementById('game-frame').src = decodeURIComponent(game);
+  } else {
+    document.body.innerHTML = `
+      <div class="error-message">
+        ❌ כתובת משחק לא תקינה או לא נבחרה.
+      </div>
+      <button onclick="history.back()">⬅ חזרה</button>`;
+  }
+
+  // כפתור מסך מלא
+  const fsBtn = document.getElementById("fullscreen-btn");
+  const gameFrame = document.getElementById("game-frame");
+
+  fsBtn.addEventListener("click", () => {
+    if (!document.fullscreenElement) {
+      if (gameFrame.requestFullscreen) gameFrame.requestFullscreen();
+      else if (gameFrame.webkitRequestFullscreen) gameFrame.webkitRequestFullscreen();
+      else if (gameFrame.msRequestFullscreen) gameFrame.msRequestFullscreen();
+      fsBtn.textContent = "❌";
+    } else {
+      if (document.exitFullscreen) document.exitFullscreen();
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+      else if (document.msExitFullscreen) document.msExitFullscreen();
+      fsBtn.textContent = "⛶";
+    }
+  });
+
+  document.addEventListener("fullscreenchange", () => {
+    if (!document.fullscreenElement) fsBtn.textContent = "⛶";
+    else fsBtn.textContent = "❌";
+  });
+</script>
+
+  <script>
+    const pupils = document.querySelectorAll('.pupil');
+    document.addEventListener('mousemove', e => {
+      const eyes = document.querySelectorAll('.eye');
+      eyes.forEach((eye, i) => {
+        const pupil = pupils[i];
+        const rect = eye.getBoundingClientRect();
+        const eyeX = rect.left + rect.width/2;
+        const eyeY = rect.top + rect.height/2;
+        const angle = Math.atan2(e.clientY - eyeY, e.clientX - eyeX);
+        const radius = 3;
+        const pupilX = Math.cos(angle)*radius;
+        const pupilY = Math.sin(angle)*radius;
+        pupil.style.left = 4 + pupilX + 'px';
+        pupil.style.top = 4 + pupilY + 'px';
+      });
+    });
+  </script>
+
+<script src="nagishli_beta.js"></script>
+</body>
+</html>
